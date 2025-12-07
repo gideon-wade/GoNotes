@@ -20,4 +20,4 @@ jobs:
         uses: ./.github/actions/setup_flutter
       
       - name: Build
-        run: flutter build ios --release --no-codesign
+        run: flutter build ios --release --no-codesign --dart-define=GOOGLE_MAPS_API_KEY=placeholder

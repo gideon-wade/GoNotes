@@ -1,9 +1,6 @@
 import Flutter
 import UIKit
-
-class Env {
-  static String get GOOGLE_MAPS_API_KEY => dotenv.env['GOOGLE_MAPS_API_KEY']!;
-}
+import GoogleMaps
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -12,7 +9,11 @@ class Env {
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
-    GMSServices.provideAPIKey(Env.GOOGLE_MAPS_API_KEY)
+    
+    if let apiKey = Bundle.main.object(forInfoDictionaryKey: "GOOGLE_MAPS_API_KEY") as? String {
+      GMSServices.provideAPIKey(apiKey)
+    }
+    
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
