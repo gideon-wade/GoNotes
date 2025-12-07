@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 
 class Env {
-  static String get IOS_API_KEY => dotenv.env['IOS_API_KEY']!;
+  static String get GOOGLE_MAPS_API_KEY => dotenv.env['GOOGLE_MAPS_API_KEY']!;
 }
 
 @main
@@ -12,7 +12,7 @@ class Env {
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
-    GMSServices.provideAPIKey(Env.IOS_API_KEY)
+    GMSServices.provideAPIKey(Env.GOOGLE_MAPS_API_KEY)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
