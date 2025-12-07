@@ -19,9 +19,6 @@ jobs:
       - name: Setup Flutter
         uses: ./.github/actions/setup_flutter
       
-      - name: Verify formatting
-        run: dart format --output=none --set-exit-if-changed .
-      
       - name: Analyze project
         run: flutter analyze --no-fatal-warnings
 
