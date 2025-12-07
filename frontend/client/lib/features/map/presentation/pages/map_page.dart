@@ -37,7 +37,6 @@ class _MapPageState extends State<MapPage> {
           target: _initialPosition,
           zoom: 14,
         ),
-        onMapCreated: (controller) => _controller = controller,
         myLocationEnabled: _locationPermissionGranted,
         myLocationButtonEnabled: _locationPermissionGranted,
       ),
