@@ -5,11 +5,15 @@ inputs:
   flutter-version:
     description: 'Flutter version'
     required: false
-    default: '3.24.0'
+    default: '3.38.4'
   channel:
     description: 'Flutter channel'
     required: false
     default: 'stable'
+  google-maps-api-key:
+    description: 'Google Maps API Key'
+    required: false
+    default: 'placeholder'
 
 runs:
   using: 'composite'
@@ -21,6 +25,10 @@ runs:
         channel: ${{ inputs.channel }}
         cache: true
     
+    - name: Create temporary .env file
+      run: echo "GOOGLE_MAPS_API_KEY=${{ inputs.google-maps-api-key }}" > frontend/client/.env
+      shell: bash
+
     - name: Install dependencies
       run: flutter pub get
       shell: bash

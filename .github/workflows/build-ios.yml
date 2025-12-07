@@ -1,4 +1,4 @@
-name: FRONTEND Build Web
+name: FRONTEND Build iOS
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-web:
-    runs-on: ubuntu-latest
+  build-ios:
+    runs-on: macos-latest
     defaults:
       run:
         working-directory: frontend/client
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup Flutter
-        uses: ./.github/actions/setup_flutter.yml
+        uses: ./.github/actions/setup_flutter
       
       - name: Build
-        run: flutter build web --release
+        run: flutter build ios --release --no-codesign --dart-define=GOOGLE_MAPS_API_KEY=placeholder

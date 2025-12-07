@@ -1,4 +1,4 @@
-name: FRONTEND Build Android
+name: FRONTEND Build Web
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-android:
+  build-web:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -16,14 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-      
       - name: Setup Flutter
-        uses: ./.github/actions/setup_flutter.yml
+        uses: ./.github/actions/setup_flutter
       
       - name: Build
-        run: flutter build apk --release
+        run: flutter build web --release
