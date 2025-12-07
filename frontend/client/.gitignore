@@ -46,3 +46,9 @@ app.*.map.json
 
 # Environment configuration file
 .env
+
+# Generated files
+**/generated_*
+**/GeneratedPluginRegistrant.*
+**/Flutter-Generated.xcconfig
+.dart_tool/flutter_build/
