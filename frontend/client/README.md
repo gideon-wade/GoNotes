@@ -1,6 +1,6 @@
 # GoNotes Client
 
-This is the client
+This is the client AHHH
 
 
 ## Features
