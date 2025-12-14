@@ -10,8 +10,8 @@ class Constants {
   static const double xlSpace = 32.0;
   // Buttons
   static const double elevatedButtonHeight = 48.0;
-  static const double elevatedButtonWidth = 12.0;
-  static const double textFormButtonBorderRadious = 12.0;
+  static const double elevatedButtonWidth = 144.0;
+  static const double textFormButtonBorderRadius = 12.0;
   static const double buttonContentPadding = 16.0;
   static const double primaryButtonBorderRadius = 30.0;
 

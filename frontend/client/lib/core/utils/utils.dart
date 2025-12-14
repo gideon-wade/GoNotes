@@ -12,19 +12,19 @@ class Utils {
       fillColor: Constants.greyTransparentColor,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          Constants.textFormButtonBorderRadious,
+          Constants.textFormButtonBorderRadius,
         ),
         borderSide: BorderSide.none,
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          Constants.textFormButtonBorderRadious,
+          Constants.textFormButtonBorderRadius,
         ),
         borderSide: BorderSide.none,
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
-          Constants.textFormButtonBorderRadious,
+          Constants.textFormButtonBorderRadius,
         ),
         borderSide: BorderSide.none,
       ),
