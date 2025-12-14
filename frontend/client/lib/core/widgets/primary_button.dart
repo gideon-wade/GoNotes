@@ -21,7 +21,10 @@ class PrimaryButton extends StatelessWidget {
             ),
           ),
         ),
-        child: Text(text),
+        child: Text(
+            text,
+            style: const TextStyle(fontSize: Constants.primaryButtonFontSize)
+        ),
       ),
     );
   }

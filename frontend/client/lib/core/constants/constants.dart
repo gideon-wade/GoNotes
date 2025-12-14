@@ -14,6 +14,7 @@ class Constants {
   static const double textFormButtonBorderRadius = 12.0;
   static const double buttonContentPadding = 16.0;
   static const double primaryButtonBorderRadius = 30.0;
+  static const double primaryButtonFontSize = 18.0;
 
   // Colors
   static final Color? greyTransparentColor = Colors.grey[200];

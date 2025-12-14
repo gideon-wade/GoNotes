@@ -16,6 +16,7 @@ class LoginPage extends StatelessWidget {
             indicatorColor: Colors.black,
             labelColor: Colors.black,
             unselectedLabelColor: Colors.grey,
+            dividerColor: Colors.transparent,
             tabs: [
               Tab(text: 'Login'),
               Tab(text: 'Sign Up'),
