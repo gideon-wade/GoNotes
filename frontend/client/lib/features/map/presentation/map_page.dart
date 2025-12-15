@@ -28,10 +28,17 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
+  int _selectedIndex = 1; // maps page
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("GoNotes Map")),
       body: GoogleMap(
         initialCameraPosition: const CameraPosition(
           target: _initialPosition,
@@ -39,6 +46,19 @@ class _MapPageState extends State<MapPage> {
         ),
         myLocationEnabled: _locationPermissionGranted,
         myLocationButtonEnabled: _locationPermissionGranted,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
+          BottomNavigationBarItem(
+            icon: Icon(_selectedIndex != 1 ? Icons.map : Icons.add),
+            label: _selectedIndex != 1 ? 'Map' : 'Add Note',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber,
+        onTap: _onItemTapped,
       ),
     );
   }
