@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'features/map/presentation/pages/map_page.dart';
+import 'features/map/presentation/map_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
