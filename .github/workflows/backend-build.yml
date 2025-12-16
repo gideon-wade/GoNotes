@@ -1,4 +1,4 @@
-name: FRONTEND Analysis and Test
+name: BACKEND Build
 
 on:
   push:
