@@ -30,14 +30,6 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  int _selectedIndex = 1; // maps page
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
