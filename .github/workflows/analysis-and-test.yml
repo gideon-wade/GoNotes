@@ -1,4 +1,4 @@
-name: BACKEND Build
+name: FRONTEND Analysis and Test
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  analyze-and-test:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: backend
+        working-directory: frontend/client
 
     steps:
       - uses: actions/checkout@v4
