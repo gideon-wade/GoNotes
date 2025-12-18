@@ -9,7 +9,7 @@ func NewService(repo Repository) *Service {
 }
 
 func (s *Service) CreateNewNote(newNoteRequest NewNoteRequestDTO) (NoteResponseDTO, error) {
-	newNote := NewNote(newNoteRequest.Title, newNoteRequest.Content)
+	newNote := NewNote(newNoteRequest.Title, newNoteRequest.Content, newNoteRequest.UserID, newNoteRequest.Latitude, newNoteRequest.Longitude)
 	err := s.repo.Save(newNote)
 	noteResponse := NoteResponseDTO{
 		ID:      newNote.ID,
