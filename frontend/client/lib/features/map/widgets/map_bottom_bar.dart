@@ -18,11 +18,11 @@ class _MapBottomBarState extends State<MapBottomBar> {
   int _lastSelectedIndex = 1; // 1 = maps page
 
   void _onItemTapped(int pressedIndex) {
+    _handleNavigation(pressedIndex);
+
     setState(() {
       _lastSelectedIndex = pressedIndex;
     });
-
-    _handleNavigation(pressedIndex);
   }
 
   void _handleNavigation(int pressedIndex) {
