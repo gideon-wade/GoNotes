@@ -6,11 +6,21 @@ import (
 )
 
 func Server() {
+	// setup dependencies
 	noteRepo := note.NewInMemNoteRepository()
 	noteService := note.NewService(noteRepo)
 	noteController := note.NewController(noteService)
 
 	router := gin.Default()
-	router.POST("/notes", noteController.PostNewNote)
+
+	// setup routes
+	api := router.Group("/gonotes/api") 
+	{	
+		v1 := api.Group("/v1")
+		{
+			v1.POST("/notes", noteController.PostNewNote)
+		}
+	}
+
 	router.Run("localhost:8080")
 }
