@@ -26,7 +26,10 @@ func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 	} else {
 		newNote, err := ctrl.service.CreateNewNote(newNoteRequest)
 		if err != nil {
-			ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"error": "failed to create note"})
+			ctx.IndentedJSON(
+				http.StatusInternalServerError,
+				error.NewInternalServerError("Failed to create note."),
+			)
 		} else {
 			ctx.IndentedJSON(http.StatusCreated, newNote)
 		}
