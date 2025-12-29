@@ -22,6 +22,8 @@ func (s *Service) CreateNewNote(newNoteRequest NewNoteRequestDTO) (NoteResponseD
 		Title:   newNote.Title,
 		Content: newNote.Content,
 		Date:    newNote.Date,
+		Longitude: newNote.Longitude,
+		Latitude: newNote.Latitude,
 	}
 	return noteResponse, err
 }
