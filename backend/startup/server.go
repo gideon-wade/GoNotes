@@ -14,7 +14,7 @@ func Server() {
 	router := gin.Default()
 
 	// setup routes
-	api := router.Group("/gonotes/api") 
+	api := router.Group("/api") 
 	{	
 		v1 := api.Group("/v1")
 		{
