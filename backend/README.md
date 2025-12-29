@@ -1,11 +1,9 @@
 # GoNotes Backend
 
-To run the server execute the following commands:
+To run the server execute the following command in `GoNotes\backend\cmd`:
 
 ```sh
-cd backend/cmd
 go run .
-```
 
 
 
