@@ -1,59 +1,58 @@
-name: BACKEND Test and analysis
+  name: BACKEND Test and analysis
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  on:
+    push:
+      branches: [ "main" ]
+    pull_request:
+      branches: [ "main" ]
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
+  jobs:
+    test:
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: backend
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.25.5' 
-          cache: true
+        - name: Set up Go
+          uses: actions/setup-go@v5
+          with:
+            go-version: '1.25.5' 
+            cache: true
 
-      - name: Download dependencies
-        run: go mod download
+        - name: Download dependencies
+          run: go mod download
 
-      - name: Verify dependencies
-        run: go mod verify
+        - name: Verify dependencies
+          run: go mod verify
 
-      - name: Test backend
-        run: go test ./...
+        - name: Test backend
+          run: go test ./...
 
-  analyze:
-    needs: test
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
-    env:
-      GO111MODULE: on
-    steps:
-      - name: Checkout Source
-        uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.25.5'
-          cache: true
+    analyze:
+      needs: test
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: backend
           
-      - name: Download dependencies
-        run: go mod download
+      steps:
+        - name: Checkout Source
+          uses: actions/checkout@v4
 
-      - name: Run Gosec Security Scanner
-        uses: securego/gosec@master
-        with:
-          args: ./...
+        - name: Set up Go
+          uses: actions/setup-go@v5
+          with:
+            go-version: '1.25.5'
+            cache: true
+            
+        - name: Download dependencies
+          run: go mod download
+
+        - name: Run Gosec Security Scanner
+          uses: securego/gosec@master
+          with:
+            args: ./...
