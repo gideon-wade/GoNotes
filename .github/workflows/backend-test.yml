@@ -32,7 +32,7 @@ jobs:
       - name: Test backend
         run: go test ./...
 
-  analysis:
+  analyze:
     needs: test
     runs-on: ubuntu-latest
     defaults:
@@ -49,6 +49,9 @@ jobs:
         with:
           go-version: '1.25.5'
           cache: true
+          
+      - name: Download dependencies
+        run: go mod download
 
       - name: Run Gosec Security Scanner
         uses: securego/gosec@master
