@@ -7,5 +7,5 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
+  runApp(const App());
 }
