@@ -93,7 +93,7 @@ func NewStandardInternalServerError(detail string) *ErrorDTO {
 		Detail: detail,
 	}
 }
-func NewInternalServerError(title string,detail string) *ErrorDTO {
+func NewInternalServerError(title string, detail string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlInternalServerError,
 		Title:  title,
