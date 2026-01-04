@@ -56,9 +56,6 @@
           run: go mod verify
 
         - name: Run Gosec Security Scanner
-          uses: securego/gosec@v2
-          env:
-            GO111MODULE: on
-          with:
-            args: ./...
+          run: gosec ./...
+
           
