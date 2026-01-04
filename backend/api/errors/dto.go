@@ -1,4 +1,4 @@
-package error
+package errors
 
 // This package implements the RFC 7807 standard for problem details in HTTP APIs.
 // More information can be found here: https://datatracker.ietf.org/doc/html/rfc7807

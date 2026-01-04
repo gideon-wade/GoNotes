@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gonotes/api/error"
+	"github.com/gonotes/api/errors"
 )
 
 type Controller struct {
@@ -21,14 +21,14 @@ func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 	if err != nil {
 		ctx.IndentedJSON(
 			http.StatusBadRequest,
-			error.NewBadRequestError("Invalid request body.", "The json body could not be serialized to the expected format."),
+			errors.NewBadRequestError("Invalid request body.", "The json body could not be serialized to the expected format."),
 		)
 	} else {
 		newNote, err := ctrl.service.CreateNewNote(newNoteRequest)
 		if err != nil {
 			ctx.IndentedJSON(
 				http.StatusInternalServerError,
-				error.NewStandardInternalServerError("Failed to create note."),
+				errors.NewStandardInternalServerError("Failed to create note."),
 			)
 		} else {
 			ctx.IndentedJSON(http.StatusCreated, newNote)
