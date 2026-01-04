@@ -21,7 +21,7 @@ func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 	if err != nil {
 		ctx.IndentedJSON(
 			http.StatusBadRequest,
-			errors.NewBadRequestError("Invalid request body.", "The json body could not be serialized to the expected format."),
+			errors.NewBadRequestError("Invalid request body.", "The json body could not be serialized to the expected format.", "400-invalid-body"),
 		)
 	} else {
 		newNote, err := ctrl.service.CreateNewNote(newNoteRequest)

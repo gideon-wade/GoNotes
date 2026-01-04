@@ -22,65 +22,72 @@ type ErrorDTO struct {
 	Status   int    `json:"status" binding:"required"`
 	Detail   string `json:"detail" binding:"required"`
 	Instance string `json:"instance"`
+	Code     string `json:"code"`
 }
 
-func NewError(errType string, title string, status int, detail, instance string) *ErrorDTO {
+func NewError(errType string, title string, status int, detail, instance string, code string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:     errType,
 		Title:    title,
 		Status:   status,
 		Detail:   detail,
 		Instance: instance,
+		Code: 	  code,
 	}
 }
 
-func NewErrorWithoutType(title string, status int, detail, instance string) *ErrorDTO {
+func NewErrorWithoutType(title string, status int, detail, instance string, code string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:     "about:blank",
 		Title:    title,
 		Status:   status,
 		Detail:   detail,
 		Instance: instance,
+		Code: 	  code,
 	}
 }
 
 // 400 — Bad Request
-func NewBadRequestError(title string, detail string) *ErrorDTO {
+func NewBadRequestError(title string, detail string, code string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlBadRequest,
 		Title:  title,
 		Status: http.StatusBadRequest,
 		Detail: detail,
+		Code:   code,
 	}
 }
 
 // 401 — Unauthorized
-func NewUnauthorizedError(title string, detail string) *ErrorDTO {
+func NewUnauthorizedError(title string, detail string, code string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlUnauthorized,
 		Title:  title,
 		Status: http.StatusUnauthorized,
 		Detail: detail,
+		Code:   code,
 	}
 }
 
 // 403 — Forbidden
-func NewForbiddenError(title string, detail string) *ErrorDTO {
+func NewForbiddenError(title string, detail string, code string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlForbidden,
 		Title:  title,
 		Status: http.StatusForbidden,
 		Detail: detail,
+		Code:   code,
 	}
 }
 
 // 404 — Not Found
-func NewNotFoundError(title string, detail string) *ErrorDTO {
+func NewNotFoundError(title string, detail string, code string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlNotFound,
 		Title:  title,
 		Status: http.StatusNotFound,
 		Detail: detail,
+		Code:   code,
 	}
 }
 
@@ -91,6 +98,7 @@ func NewStandardInternalServerError(detail string) *ErrorDTO {
 		Title:  TitleInternalServerError,
 		Status: http.StatusInternalServerError,
 		Detail: detail,
+		Code:  "500",
 	}
 }
 func NewInternalServerError(title string, detail string) *ErrorDTO {
@@ -99,6 +107,7 @@ func NewInternalServerError(title string, detail string) *ErrorDTO {
 		Title:  title,
 		Status: http.StatusInternalServerError,
 		Detail: detail,
+		Code:   "500",
 	}
 }
 
