@@ -56,6 +56,10 @@
           run: go mod verify
 
         - name: Run Gosec Security Scanner
-          run: gosec ./...
+          uses: securego/gosec@v2
+          with:
+            args: ./...
+            working-directory: backend
+
 
           
