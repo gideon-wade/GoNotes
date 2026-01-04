@@ -45,50 +45,58 @@ func NewErrorWithoutType(title string, status int, detail, instance string) *Err
 }
 
 // 400 — Bad Request
-func NewBadRequestError(detail string) *ErrorDTO {
+func NewBadRequestError(title string, detail string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlBadRequest,
-		Title:  TitleBadRequest,
+		Title:  title,
 		Status: http.StatusBadRequest,
 		Detail: detail,
 	}
 }
 
 // 401 — Unauthorized
-func NewUnauthorizedError(detail string) *ErrorDTO {
+func NewUnauthorizedError(title string, detail string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlUnauthorized,
-		Title:  TitleUnauthorized,
+		Title:  title,
 		Status: http.StatusUnauthorized,
 		Detail: detail,
 	}
 }
 
 // 403 — Forbidden
-func NewForbiddenError(detail string) *ErrorDTO {
+func NewForbiddenError(title string, detail string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlForbidden,
-		Title:  TitleForbidden,
+		Title:  title,
 		Status: http.StatusForbidden,
 		Detail: detail,
 	}
 }
 
 // 404 — Not Found
-func NewNotFoundError(detail string) *ErrorDTO {
+func NewNotFoundError(title string, detail string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlNotFound,
-		Title:  TitleNotFound,
+		Title:  title,
 		Status: http.StatusNotFound,
 		Detail: detail,
 	}
 }
 
 // 500 — Internal Server Error
-func NewInternalServerError(detail string) *ErrorDTO {
+func NewStandardInternalServerError(detail string) *ErrorDTO {
 	return &ErrorDTO{
 		Type:   UrlInternalServerError,
 		Title:  TitleInternalServerError,
+		Status: http.StatusInternalServerError,
+		Detail: detail,
+	}
+}
+func NewInternalServerError(title string,detail string) *ErrorDTO {
+	return &ErrorDTO{
+		Type:   UrlInternalServerError,
+		Title:  title,
 		Status: http.StatusInternalServerError,
 		Detail: detail,
 	}
