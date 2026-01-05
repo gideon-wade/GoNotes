@@ -8,6 +8,7 @@ class NoteCubit extends Cubit<NoteState> {
   NoteCubit(this.createNoteUseCase) : super(NoteInitial());
 
   Future<void> createNote({
+    required String userId,
     required String title,
     required String content,
     required double latitude,
@@ -16,6 +17,7 @@ class NoteCubit extends Cubit<NoteState> {
     emit(NoteLoading());
     try {
       final note = await createNoteUseCase(
+        userId: userId,
         title: title,
         content: content,
         latitude: latitude,

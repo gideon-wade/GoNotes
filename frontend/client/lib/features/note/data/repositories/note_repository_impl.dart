@@ -11,6 +11,7 @@ class NoteRepositoryImpl implements NoteRepository {
   @override
   Future<Note> createNote(Note note) async {
     final noteModel = NoteModel(
+      userId: note.userId,
       title: note.title,
       content: note.content,
       latitude: note.latitude,

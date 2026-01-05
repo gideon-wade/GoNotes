@@ -10,7 +10,7 @@ final locator = GetIt.instance;
 
 Future<void> setupLocator() async {
   locator.registerLazySingleton<Dio>(
-    () => Dio(BaseOptions(baseUrl: 'http://localhost:8080')),
+    () => Dio(BaseOptions(baseUrl: 'http://10.0.2.2:8080')),
   );
 
   locator.registerLazySingleton<NoteRemoteDataSource>(

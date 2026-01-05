@@ -24,12 +24,15 @@ class _CreateNotePageState extends State<CreateNotePage> {
   void _submit() {
     if (_titleController.text.isEmpty || _contentController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Need to fill out both title and content')),
+        const SnackBar(
+          content: Text('Need to fill out both title and content'),
+        ),
       );
       return;
     }
 
     context.read<NoteCubit>().createNote(
+      userId: "I-AM-TEST-USER-ID",
       title: _titleController.text,
       content: _contentController.text,
       latitude: widget.latitude,
@@ -40,20 +43,18 @@ class _CreateNotePageState extends State<CreateNotePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create Note'),
-      ),
+      appBar: AppBar(title: const Text('Create Note')),
       body: BlocListener<NoteCubit, NoteState>(
         listener: (context, state) {
           if (state is NoteCreateSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Note created')),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('Note created')));
             Navigator.pop(context);
           } else if (state is NoteError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         child: SingleChildScrollView(

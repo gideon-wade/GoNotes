@@ -3,6 +3,7 @@ import '../../domain/entities/note.dart';
 class NoteModel extends Note {
   NoteModel({
     super.id,
+    required super.userId,
     required super.title,
     required super.content,
     required super.latitude,
@@ -13,6 +14,7 @@ class NoteModel extends Note {
   factory NoteModel.fromJson(Map<String, dynamic> json) {
     return NoteModel(
       id: json['id'],
+      userId: json['user_id'],
       title: json['title'],
       content: json['content'],
       latitude: json['latitude'].toDouble(),
@@ -23,6 +25,7 @@ class NoteModel extends Note {
 
   Map<String, dynamic> toJson() {
     return {
+      'user_id': userId,
       'title': title,
       'content': content,
       'latitude': latitude,
