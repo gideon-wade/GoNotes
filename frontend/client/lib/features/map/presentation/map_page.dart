@@ -12,7 +12,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  GoogleMapController? _controller;
+  //GoogleMapController? _controller;
   bool _locationPermissionGranted = false;
   Position? _currentPosition = Position(
     latitude: 55.6761,
