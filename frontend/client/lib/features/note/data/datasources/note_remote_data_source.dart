@@ -7,7 +7,7 @@ class NoteRemoteDataSource {
   NoteRemoteDataSource(this.dio);
 
   Future<NoteModel> createNote(NoteModel note) async {
-    final response = await dio.post('/api/notes', data: note.toJson());
+    final response = await dio.post('/api/v1/notes', data: note.toJson());
 
     return NoteModel.fromJson(response.data);
   }
