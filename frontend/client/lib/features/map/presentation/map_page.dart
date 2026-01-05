@@ -56,7 +56,7 @@ class _MapPageState extends State<MapPage> {
         _currentPosition = position;
       });
     } catch (e) {
-      print('Error getting location: $e');
+      //print('Error getting location: $e');
     }
   }
 
