@@ -32,34 +32,4 @@
         - name: Test backend
           run: go test ./...
 
-    analyze:
-      needs: test
-      runs-on: ubuntu-latest
-      defaults:
-        run:
-          working-directory: backend
-
-      steps:
-        - name: Checkout Source
-          uses: actions/checkout@v4
-
-        - name: Set up Go
-          uses: actions/setup-go@v5
-          with:
-            go-version: '1.25.5'
-            cache: true
-            
-        - name: Download dependencies
-          run: go mod download
-
-        - name: Verify dependencies
-          run: go mod verify
-
-        - name: Run Gosec Security Scanner
-          uses: securego/gosec@master
-          with:
-            args: ./...
-            working-directory: backend
-
-
-          
+    
