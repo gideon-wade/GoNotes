@@ -10,7 +10,7 @@ func (l *StdOutLogger) Log(event LogEvent) {
 		case DebugLevel:
 			println("")
 		case ErrorLevel:
-			println("")
+			println(LogLevelToString(event.Level) + ": " + event.Message + event.Error.Error())
 		case FatalLevel:
 			println("")
 	}

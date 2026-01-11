@@ -7,6 +7,7 @@ type Logger interface {
 type LogEvent struct {
 	Level   LogLevel
 	Message string
+	Error   error
 }
 
 type LogLevel string
@@ -24,4 +25,12 @@ func LogLevelToString(level LogLevel) string {
 
 func NewLogEvent(level LogLevel, message string) LogEvent {
 	return LogEvent{Level: level, Message: message}
+}
+
+func NewLogEventError(message string, err error) LogEvent {
+	return LogEvent {
+		Level:  ErrorLevel, 	
+		Message: message, 
+		Error: err,
+	}
 }

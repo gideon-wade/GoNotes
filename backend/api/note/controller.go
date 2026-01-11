@@ -19,10 +19,14 @@ func NewController(service *Service, logger logging.Logger) *Controller {
 }
 
 func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
+	ctrl.logger.Log(logging.RequestReceived(ctx))
 	var newNoteRequest NewNoteRequestDTO
-	ctrl.logger.Log(logging.NewLogEvent(logging.InfoLevel, "Received request to create a new note."))
 	err := ctx.BindJSON(&newNoteRequest)
 	if err != nil {
+		ctrl.logger.Log(logging.NewLogEventError(
+			"Invalid request body.",
+			err,	
+		))
 		ctx.IndentedJSON(
 			http.StatusBadRequest,
 			error.NewBadRequestError("Invalid request body."),
@@ -30,11 +34,16 @@ func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 	} else {
 		newNote, err := ctrl.service.CreateNewNote(newNoteRequest)
 		if err != nil {
+			ctrl.logger.Log(logging.NewLogEventError(
+				"Failed to create note.",
+				err,
+			))
 			ctx.IndentedJSON(
 				http.StatusInternalServerError,
 				error.NewInternalServerError("Failed to create note."),
 			)
 		} else {
+			ctrl.logger.Log(logging.RequestCompleted(ctx))
 			ctx.IndentedJSON(http.StatusCreated, newNote)
 		}
 	}
