@@ -3,13 +3,15 @@ package startup
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/gonotes/api/note"
+	"github.com/gonotes/api/logging"
 )
 
 func Server() {
 	// setup dependencies
 	noteRepo := note.NewInMemNoteRepository()
 	noteService := note.NewService(noteRepo)
-	noteController := note.NewController(noteService)
+	noteControllerLogger := logging.NewStdOutLogger()
+	noteController := note.NewController(noteService, noteControllerLogger)
 
 	router := gin.Default()
 

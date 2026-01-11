@@ -6,18 +6,21 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gonotes/api/error"
+	"github.com/gonotes/api/logging"
 )
 
 type Controller struct {
 	service *Service
+	logger logging.Logger
 }
 
-func NewController(service *Service) *Controller {
-	return &Controller{service: service}
+func NewController(service *Service, logger logging.Logger) *Controller {
+	return &Controller{service: service, logger: logger}
 }
 
 func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 	var newNoteRequest NewNoteRequestDTO
+	ctrl.logger.Log(logging.NewLogEvent(logging.InfoLevel, "Received request to create a new note."))
 	err := ctx.BindJSON(&newNoteRequest)
 	if err != nil {
 		ctx.IndentedJSON(
