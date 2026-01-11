@@ -1,18 +1,18 @@
+import 'package:client/features/login/presentation/login_page.dart';
 import 'package:flutter/material.dart';
-import 'features/map/presentation/pages/map_page.dart';
+import 'package:client/core/theme/theme.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'GoNotes',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.blue,
-      ),
-      home: const MapPage(),
+      theme: AppTheme.light.toThemeData(),
+      darkTheme: AppTheme.dark.toThemeData(),
+      themeMode: ThemeMode.system,
+      home: const LoginPage(),
     );
   }
 }
