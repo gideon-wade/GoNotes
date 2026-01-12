@@ -1,6 +1,7 @@
 package note
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -34,5 +35,40 @@ func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 			ctx.IndentedJSON(http.StatusCreated, newNote)
 		}
 	}
+}
 
+func (ctrl *Controller) GetAllNotes(ctx *gin.Context) {
+	notes, err := ctrl.service.GetAllNotes()
+
+	if err != nil {
+		ctx.IndentedJSON(
+			http.StatusInternalServerError,
+			error.NewInternalServerError("Failed to get notes."),
+		)
+	} else {
+		ctx.IndentedJSON(http.StatusOK, notes)
+	}
+}
+
+func (ctrl *Controller) GetNoteByID(ctx *gin.Context) {
+	noteID := ctx.Param("id")
+
+	note, err := ctrl.service.GetNoteByID(noteID)
+
+	if err != nil {
+		ctx.IndentedJSON(
+			http.StatusInternalServerError,
+			error.NewInternalServerError("Failed to get notes."),
+		)
+	} else {
+		if note == nil {
+			ctx.IndentedJSON(
+				http.StatusNotFound,
+				error.NewNotFoundError(
+					fmt.Sprintf("Note with id %s not found.", noteID)),
+			)
+		} else {
+			ctx.IndentedJSON(http.StatusOK, note)
+		}
+	}
 }
