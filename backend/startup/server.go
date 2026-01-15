@@ -19,6 +19,8 @@ func Server() {
 		v1 := api.Group("/v1")
 		{
 			v1.POST("/notes", noteController.PostNewNote)
+			v1.GET("/notes", noteController.GetAllNotes)
+			v1.GET("/notes/:id", noteController.GetNoteByID)
 		}
 	}
 
