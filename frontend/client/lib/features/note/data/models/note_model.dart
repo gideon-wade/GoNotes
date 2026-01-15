@@ -14,7 +14,7 @@ class NoteModel extends Note {
   factory NoteModel.fromJson(Map<String, dynamic> json) {
     return NoteModel(
       id: json['id'],
-      userId: json['user_id'],
+      userId: json['userID'],
       title: json['title'],
       content: json['content'],
       latitude: json['latitude'].toDouble(),
@@ -25,7 +25,7 @@ class NoteModel extends Note {
 
   Map<String, dynamic> toJson() {
     return {
-      'user_id': userId,
+      'userID': userId,
       'title': title,
       'content': content,
       'latitude': latitude,

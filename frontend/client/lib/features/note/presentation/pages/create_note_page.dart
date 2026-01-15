@@ -32,7 +32,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
     }
 
     context.read<NoteCubit>().createNote(
-      userId: "I-AM-TEST-USER-ID",
+      userId: "0000004432",
       title: _titleController.text,
       content: _contentController.text,
       latitude: widget.latitude,
