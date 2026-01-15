@@ -37,7 +37,10 @@ class _SignupFormState extends State<SignupForm> {
             TextFormField(
               controller: _emailController,
               cursorColor: Colors.black,
-              decoration: Utils.textFormFieldDecoration(hintText: 'Email'),
+              decoration: Utils.textFormFieldDecoration(
+                context: context,
+                hintText: 'Email',
+              ),
             ),
 
             Utils.emptySpace(height: Constants.mSpace),
@@ -45,7 +48,10 @@ class _SignupFormState extends State<SignupForm> {
             TextFormField(
               controller: _usernameController,
               cursorColor: Colors.black,
-              decoration: Utils.textFormFieldDecoration(hintText: 'Username'),
+              decoration: Utils.textFormFieldDecoration(
+                context: context,
+                hintText: 'Username',
+              ),
             ),
 
             Utils.emptySpace(height: Constants.mSpace),
@@ -54,7 +60,10 @@ class _SignupFormState extends State<SignupForm> {
               controller: _passwordController,
               obscureText: true,
               cursorColor: Colors.black,
-              decoration: Utils.textFormFieldDecoration(hintText: 'Password'),
+              decoration: Utils.textFormFieldDecoration(
+                context: context,
+                hintText: 'Password',
+              ),
             ),
 
             Utils.emptySpace(height: Constants.mSpace),
@@ -64,6 +73,7 @@ class _SignupFormState extends State<SignupForm> {
               obscureText: true,
               cursorColor: Colors.black,
               decoration: Utils.textFormFieldDecoration(
+                context: context,
                 hintText: 'Confirm Password',
               ),
             ),
