@@ -5,11 +5,14 @@ class Utils {
   static SizedBox emptySpace({double? width, double? height}) =>
       SizedBox(width: width, height: height);
 
-  static InputDecoration textFormFieldDecoration({String? hintText}) {
+  static InputDecoration textFormFieldDecoration({
+    required BuildContext context,
+    String? hintText,
+  }) {
     return InputDecoration(
       hintText: hintText,
       filled: true,
-      fillColor: Constants.greyTransparentColor,
+      fillColor: Theme.of(context).colorScheme.secondary,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
           Constants.textFormButtonBorderRadius,
