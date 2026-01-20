@@ -5,13 +5,13 @@ class DarkColorTheme extends ColorTheme {
   @override
   Color get primaryColor => Color(0xFFe9c316);
   @override
-  Color get secondaryColor => Color(0xFF33305a);
+  Color get secondaryColor => Color(0xFF3b3768);
   @override
-  Color get accentColor => Color(0xff403d7b);
+  Color get accentColor => Color(0xff514d9d);
   @override
   Color get surfaceColor => Color(0xFF1d160c);
   @override
-  Color get textColor => Color(0xFF7a75db);
+  Color get textColor => Color(0xFFfcf8f3);
   @override
   Color get errorColor => Color(0xFFB00020);
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class ColorTheme {
+abstract class ColorTheme extends ThemeExtension<ColorTheme> {
   Color get primaryColor;
   Color get secondaryColor;
   Color get accentColor;
@@ -29,4 +29,17 @@ abstract class ColorTheme {
       brightness: brightness,
     );
   }
+
+  @override
+  ThemeExtension<ColorTheme> copyWith() => this;
+
+  @override
+  ThemeExtension<ColorTheme> lerp(
+    ThemeExtension<ColorTheme>? other,
+    double t,
+  ) => this;
+}
+
+extension ColorThemeExtension on BuildContext {
+  ColorTheme get colors => Theme.of(this).extension<ColorTheme>()!;
 }
