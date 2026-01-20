@@ -33,7 +33,10 @@ class _LoginFormState extends State<LoginForm> {
             TextFormField(
               controller: _usernameController,
               cursorColor: Colors.black,
-              decoration: Utils.textFormFieldDecoration(hintText: 'Username'),
+              decoration: Utils.textFormFieldDecoration(
+                context: context,
+                hintText: 'Username',
+              ),
             ),
 
             Utils.emptySpace(height: Constants.mSpace),
@@ -42,7 +45,10 @@ class _LoginFormState extends State<LoginForm> {
               controller: _passwordController,
               obscureText: true,
               cursorColor: Colors.black,
-              decoration: Utils.textFormFieldDecoration(hintText: 'Password'),
+              decoration: Utils.textFormFieldDecoration(
+                context: context,
+                hintText: 'Password',
+              ),
             ),
 
             Utils.emptySpace(height: Constants.lSpace),

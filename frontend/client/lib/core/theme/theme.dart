@@ -12,14 +12,18 @@ class AppTheme {
     buttonTheme = AppButtonTheme(colorTheme);
   }
 
-  ThemeData toThemeData() => ThemeData.from(
-    useMaterial3: true,
-    colorScheme: colorTheme.toColorScheme(),
-    textTheme: TextTheme(
-      bodyMedium: TextStyle(color: colorTheme.textColor),
-      bodyLarge: TextStyle(color: colorTheme.textColor),
-    ),
-  ).copyWith(elevatedButtonTheme: buttonTheme.elevatedButtonThemeData());
+  ThemeData toThemeData() =>
+      ThemeData.from(
+        useMaterial3: true,
+        colorScheme: colorTheme.toColorScheme(),
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(color: colorTheme.textColor),
+          bodyLarge: TextStyle(color: colorTheme.textColor),
+        ),
+      ).copyWith(
+        elevatedButtonTheme: buttonTheme.elevatedButtonThemeData(),
+        extensions: [colorTheme],
+      );
 
   static AppTheme get light => AppTheme(colorTheme: LightColorTheme());
   static AppTheme get dark => AppTheme(colorTheme: DarkColorTheme());

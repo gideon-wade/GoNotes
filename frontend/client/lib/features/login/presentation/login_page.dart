@@ -12,9 +12,9 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          bottom: const TabBar(
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
+          bottom: TabBar(
+            indicatorColor: Theme.of(context).colorScheme.tertiary,
+            labelColor: Theme.of(context).colorScheme.tertiary,
             unselectedLabelColor: Colors.grey,
             dividerColor: Colors.transparent,
             tabs: [
