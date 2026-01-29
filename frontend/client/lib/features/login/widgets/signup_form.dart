@@ -3,6 +3,7 @@ import 'package:client/core/utils/utils.dart';
 import 'package:client/core/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:client/features/map/presentation/pages/map_page.dart';
+import 'package:client/core/theme/colors/color_theme.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -36,7 +37,7 @@ class _SignupFormState extends State<SignupForm> {
           children: [
             TextFormField(
               controller: _emailController,
-              cursorColor: Colors.black,
+              cursorColor: context.colors.textColor,
               decoration: Utils.textFormFieldDecoration(
                 context: context,
                 hintText: 'Email',
@@ -47,7 +48,7 @@ class _SignupFormState extends State<SignupForm> {
 
             TextFormField(
               controller: _usernameController,
-              cursorColor: Colors.black,
+              cursorColor: context.colors.textColor,
               decoration: Utils.textFormFieldDecoration(
                 context: context,
                 hintText: 'Username',
@@ -59,7 +60,7 @@ class _SignupFormState extends State<SignupForm> {
             TextFormField(
               controller: _passwordController,
               obscureText: true,
-              cursorColor: Colors.black,
+              cursorColor: context.colors.textColor,
               decoration: Utils.textFormFieldDecoration(
                 context: context,
                 hintText: 'Password',
@@ -71,7 +72,7 @@ class _SignupFormState extends State<SignupForm> {
             TextFormField(
               controller: _confirmPasswordController,
               obscureText: true,
-              cursorColor: Colors.black,
+              cursorColor: context.colors.textColor,
               decoration: Utils.textFormFieldDecoration(
                 context: context,
                 hintText: 'Confirm Password',

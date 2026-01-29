@@ -3,6 +3,7 @@ import 'package:client/core/utils/utils.dart';
 import 'package:client/core/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:client/features/map/presentation/pages/map_page.dart';
+import 'package:client/core/theme/colors/color_theme.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -32,7 +33,7 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             TextFormField(
               controller: _usernameController,
-              cursorColor: Colors.black,
+              cursorColor: context.colors.textColor,
               decoration: Utils.textFormFieldDecoration(
                 context: context,
                 hintText: 'Username',
@@ -44,7 +45,7 @@ class _LoginFormState extends State<LoginForm> {
             TextFormField(
               controller: _passwordController,
               obscureText: true,
-              cursorColor: Colors.black,
+              cursorColor: context.colors.textColor,
               decoration: Utils.textFormFieldDecoration(
                 context: context,
                 hintText: 'Password',
