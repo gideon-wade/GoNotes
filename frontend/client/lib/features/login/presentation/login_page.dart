@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/login_form.dart';
 import '../widgets/signup_form.dart';
+import 'package:client/core/theme/colors/color_theme.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -12,9 +13,9 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          bottom: const TabBar(
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
+          bottom: TabBar(
+            indicatorColor: context.colors.secondaryColor,
+            labelColor: context.colors.secondaryColor,
             unselectedLabelColor: Colors.grey,
             dividerColor: Colors.transparent,
             tabs: [

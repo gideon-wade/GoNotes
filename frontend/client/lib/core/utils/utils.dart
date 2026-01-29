@@ -5,11 +5,16 @@ class Utils {
   static SizedBox emptySpace({double? width, double? height}) =>
       SizedBox(width: width, height: height);
 
-  static InputDecoration textFormFieldDecoration({String? hintText}) {
+  static InputDecoration textFormFieldDecoration({
+    required BuildContext context,
+    String? hintText,
+  }) {
     return InputDecoration(
       hintText: hintText,
       filled: true,
-      fillColor: Constants.greyTransparentColor,
+      fillColor: Theme.of(context).brightness == Brightness.light
+          ? Constants.textFormFieldColorBright
+          : Constants.textFormFieldColorDark,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
           Constants.textFormButtonBorderRadius,
@@ -31,6 +36,26 @@ class Utils {
       contentPadding: const EdgeInsets.symmetric(
         horizontal: Constants.buttonContentPadding,
         vertical: Constants.buttonContentPadding,
+      ),
+    );
+  }
+
+  static Widget elevatedTextFormField({
+    required BuildContext context,
+    String? hintText,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          Constants.textFormButtonBorderRadius,
+        ),
+        boxShadow: Constants.mediumElevation,
+      ),
+      child: TextFormField(
+        decoration: textFormFieldDecoration(
+          context: context,
+          hintText: hintText,
+        ),
       ),
     );
   }

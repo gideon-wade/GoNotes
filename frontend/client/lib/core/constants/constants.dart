@@ -18,4 +18,37 @@ class Constants {
 
   // Colors
   static final Color? greyTransparentColor = Colors.grey[200];
+  static final Color textFormFieldColorBright = Color(0XFFf3ece2);
+  static final Color textFormFieldColorDark = Color(0XFF44370d);
+
+  // Elevations
+  static List<BoxShadow> get subtleElevation => [
+    BoxShadow(
+      color: Colors.black.withAlpha(20),
+      offset: const Offset(0, 2),
+      blurRadius: 4,
+      spreadRadius: 0,
+    ),
+    BoxShadow(
+      color: Colors.black.withAlpha(10),
+      offset: const Offset(0, 1),
+      blurRadius: 2,
+      spreadRadius: 0,
+    ),
+  ];
+
+  static List<BoxShadow> get mediumElevation => [
+    BoxShadow(
+      color: Colors.black.withAlpha(25),
+      offset: const Offset(0, 4),
+      blurRadius: 8,
+      spreadRadius: 0,
+    ),
+    BoxShadow(
+      color: Colors.black.withAlpha(15),
+      offset: const Offset(0, 2),
+      blurRadius: 4,
+      spreadRadius: 0,
+    ),
+  ];
 }
