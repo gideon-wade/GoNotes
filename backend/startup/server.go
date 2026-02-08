@@ -7,6 +7,7 @@ import (
 
 func Server() {
 	// setup dependencies
+	// note
 	noteRepo := note.NewInMemNoteRepository()
 	noteService := note.NewService(noteRepo)
 	noteController := note.NewController(noteService)
