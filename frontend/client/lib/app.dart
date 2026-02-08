@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'GoNotes',
-      theme: AppTheme.dark.toThemeData(),
+      theme: AppTheme.light.toThemeData(),
       darkTheme: AppTheme.dark.toThemeData(),
       themeMode: ThemeMode.system,
       home: const LoginPage(),
