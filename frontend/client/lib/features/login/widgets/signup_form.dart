@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:client/features/map/presentation/pages/map_page.dart';
 import 'package:client/core/theme/colors/color_theme.dart';
 
+
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
 
@@ -14,7 +15,7 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
   final _emailController = TextEditingController();
-  final _usernameController = TextEditingController();
+  final _usernameController = TextEditingController();  
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
