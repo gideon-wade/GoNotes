@@ -2,7 +2,7 @@ import 'package:client/core/constants/constants.dart';
 import 'package:client/core/utils/utils.dart';
 import 'package:client/core/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:client/features/map/presentation/pages/map_page.dart';
+import '../../map/presentation/map_page.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -13,7 +13,7 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
   final _emailController = TextEditingController();
-  final _usernameController = TextEditingController();
+  final _usernameController = TextEditingController();  
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
