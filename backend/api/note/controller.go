@@ -43,7 +43,7 @@ func (ctrl *Controller) GetAllNotes(ctx *gin.Context) {
 	if err != nil {
 		ctx.IndentedJSON(
 			http.StatusInternalServerError,
-			error.NewInternalServerError("Failed to get notes."),
+			errors.NewStandardInternalServerError("Failed to get notes."),
 		)
 	} else {
 		ctx.IndentedJSON(http.StatusOK, notes)
@@ -58,14 +58,17 @@ func (ctrl *Controller) GetNoteByID(ctx *gin.Context) {
 	if err != nil {
 		ctx.IndentedJSON(
 			http.StatusInternalServerError,
-			error.NewInternalServerError("Failed to get notes."),
+			errors.NewStandardInternalServerError("Failed to get notes."),
 		)
 	} else {
 		if note == nil {
 			ctx.IndentedJSON(
 				http.StatusNotFound,
-				error.NewNotFoundError(
-					fmt.Sprintf("Note with id %s not found.", noteID)),
+				errors.NewNotFoundError(
+					"Note not found.",
+					fmt.Sprintf("Note with id %s not found.", noteID),
+					"note-not-found",
+				),
 			)
 		} else {
 			ctx.IndentedJSON(http.StatusOK, note)
