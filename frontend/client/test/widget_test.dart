@@ -10,7 +10,9 @@ void main() {
     await tester.tap(loginButton);
     await tester.pumpAndSettle();
 
-    expect(find.text('GoNotes Map'), findsOneWidget);
+    expect(find.text('Profile'), findsOneWidget);
+    expect(find.text('Create Note'), findsOneWidget);
+    expect(find.text('Notifications'), findsOneWidget);
   });
 
   testWidgets('Can switch between Login and Sign Up tabs', (

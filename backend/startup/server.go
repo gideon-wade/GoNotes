@@ -10,6 +10,7 @@ import (
 
 func Server() {
 	// setup dependencies
+	// note
 	noteRepo := note.NewInMemNoteRepository()
 	noteService := note.NewService(noteRepo)
 	noteControllerLogger := logging.NewStdOutLogger()
