@@ -1,8 +1,9 @@
 import 'package:client/core/constants/constants.dart';
 import 'package:client/core/utils/utils.dart';
 import 'package:client/core/widgets/primary_button.dart';
+import 'package:client/features/map/presentation/map_page.dart';
 import 'package:flutter/material.dart';
-import '../../map/presentation/map_page.dart';
+import 'package:client/core/theme/colors/color_theme.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -13,7 +14,7 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
   final _emailController = TextEditingController();
-  final _usernameController = TextEditingController();  
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
@@ -36,16 +37,22 @@ class _SignupFormState extends State<SignupForm> {
           children: [
             TextFormField(
               controller: _emailController,
-              cursorColor: Colors.black,
-              decoration: Utils.textFormFieldDecoration(hintText: 'Email'),
+              cursorColor: context.colors.textColor,
+              decoration: Utils.textFormFieldDecoration(
+                context: context,
+                hintText: 'Email',
+              ),
             ),
 
             Utils.emptySpace(height: Constants.mSpace),
 
             TextFormField(
               controller: _usernameController,
-              cursorColor: Colors.black,
-              decoration: Utils.textFormFieldDecoration(hintText: 'Username'),
+              cursorColor: context.colors.textColor,
+              decoration: Utils.textFormFieldDecoration(
+                context: context,
+                hintText: 'Username',
+              ),
             ),
 
             Utils.emptySpace(height: Constants.mSpace),
@@ -53,8 +60,11 @@ class _SignupFormState extends State<SignupForm> {
             TextFormField(
               controller: _passwordController,
               obscureText: true,
-              cursorColor: Colors.black,
-              decoration: Utils.textFormFieldDecoration(hintText: 'Password'),
+              cursorColor: context.colors.textColor,
+              decoration: Utils.textFormFieldDecoration(
+                context: context,
+                hintText: 'Password',
+              ),
             ),
 
             Utils.emptySpace(height: Constants.mSpace),
@@ -62,8 +72,9 @@ class _SignupFormState extends State<SignupForm> {
             TextFormField(
               controller: _confirmPasswordController,
               obscureText: true,
-              cursorColor: Colors.black,
+              cursorColor: context.colors.textColor,
               decoration: Utils.textFormFieldDecoration(
+                context: context,
                 hintText: 'Confirm Password',
               ),
             ),
