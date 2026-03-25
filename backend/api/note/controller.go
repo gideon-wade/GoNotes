@@ -24,17 +24,19 @@ func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 			http.StatusBadRequest,
 			errors.NewBadRequestError("Invalid request body.", "The json body could not be serialized to the expected format.", "400-invalid-body"),
 		)
-	} else {
-		newNote, err := ctrl.service.CreateNewNote(newNoteRequest)
-		if err != nil {
-			ctx.IndentedJSON(
-				http.StatusInternalServerError,
-				errors.NewStandardInternalServerError("Failed to create note."),
-			)
-		} else {
-			ctx.IndentedJSON(http.StatusCreated, newNote)
-		}
-	}
+		return
+	} 
+	
+	newNote, err := ctrl.service.CreateNewNote(newNoteRequest)
+	if err != nil {
+		ctx.IndentedJSON(
+			http.StatusInternalServerError,
+			errors.NewStandardInternalServerError("Failed to create note."),
+		)
+		return
+	} 
+
+	ctx.IndentedJSON(http.StatusCreated, newNote)
 }
 
 func (ctrl *Controller) GetAllNotes(ctx *gin.Context) {
@@ -45,9 +47,9 @@ func (ctrl *Controller) GetAllNotes(ctx *gin.Context) {
 			http.StatusInternalServerError,
 			errors.NewStandardInternalServerError("Failed to get notes."),
 		)
-	} else {
-		ctx.IndentedJSON(http.StatusOK, notes)
-	}
+		return
+	} 
+	ctx.IndentedJSON(http.StatusOK, notes)
 }
 
 func (ctrl *Controller) GetNoteByID(ctx *gin.Context) {
@@ -60,18 +62,19 @@ func (ctrl *Controller) GetNoteByID(ctx *gin.Context) {
 			http.StatusInternalServerError,
 			errors.NewStandardInternalServerError("Failed to get notes."),
 		)
-	} else {
-		if note == nil {
-			ctx.IndentedJSON(
-				http.StatusNotFound,
-				errors.NewNotFoundError(
-					"Note not found.",
-					fmt.Sprintf("Note with id %s not found.", noteID),
-					"note-not-found",
-				),
-			)
-		} else {
-			ctx.IndentedJSON(http.StatusOK, note)
-		}
-	}
+		return
+	} 
+	if note == nil {
+		ctx.IndentedJSON(
+			http.StatusNotFound,
+			errors.NewNotFoundError(
+				"Note not found.",
+				fmt.Sprintf("Note with id %s not found.", noteID),
+				"note-not-found",
+			),
+		)
+		return
+	} 
+
+	ctx.IndentedJSON(http.StatusOK, note)
 }
