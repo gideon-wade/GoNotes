@@ -1,7 +1,10 @@
 package startup
 
 import (
+	"io"
+	"os"
 	"github.com/gin-gonic/gin"
+	"github.com/gonotes/api/logging"
 	"github.com/gonotes/api/note"
 )
 
@@ -10,7 +13,15 @@ func Server() {
 	// note
 	noteRepo := note.NewInMemNoteRepository()
 	noteService := note.NewService(noteRepo)
-	noteController := note.NewController(noteService)
+	noteControllerLogger := logging.NewStdOutLogger()
+	noteController := note.NewController(noteService, noteControllerLogger)
+
+	// setup gin
+	if (!gin.IsDebugging()) {
+		gin.DisableConsoleColor()
+		f, _ := os.Create("gin.log")
+		gin.DefaultWriter = io.MultiWriter(f)
+	}
 
 	router := gin.Default()
 
