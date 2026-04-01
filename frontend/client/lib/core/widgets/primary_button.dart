@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:client/core/constants/constants.dart';
+import 'package:client/core/theme/colors/color_theme.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;
@@ -22,8 +23,13 @@ class PrimaryButton extends StatelessWidget {
           ),
         ),
         child: Text(
-            text,
-            style: const TextStyle(fontSize: Constants.primaryButtonFontSize)
+          text,
+          style: TextStyle(
+            fontSize: Constants.primaryButtonFontSize,
+            color: context.colors.brightness == Brightness.light
+                ? context.colors.textColor
+                : context.colors.surfaceColor,
+          ),
         ),
       ),
     );
