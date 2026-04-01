@@ -31,12 +31,12 @@ func Server() {
 			v1.POST("/auth/register", authController.Register)
 			v1.POST("/auth/login", authController.Login)
 			v1.POST("/auth/refresh", authController.Refresh)
-			v1.POST("/auth/logout", authController.Logout)
 
 			// protected endpoints
 			protected := v1.Group("")
 			protected.Use(auth.AuthMiddleware(jwtSecret))
 			{
+				protected.POST("/auth/logout", authController.Logout)
 				protected.POST("/notes", noteController.PostNewNote)
 				protected.GET("/notes", noteController.GetAllNotes)
 				protected.GET("/notes/:id", noteController.GetNoteByID)

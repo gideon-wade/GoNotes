@@ -25,7 +25,8 @@ func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 			error.NewBadRequestError("Invalid request body."),
 		)
 	} else {
-		newNote, err := ctrl.service.CreateNewNote(newNoteRequest)
+		userID := ctx.GetString("userID")
+		newNote, err := ctrl.service.CreateNewNote(newNoteRequest, userID)
 		if err != nil {
 			ctx.IndentedJSON(
 				http.StatusInternalServerError,

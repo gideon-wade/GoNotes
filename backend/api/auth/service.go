@@ -153,8 +153,8 @@ func (s *Service) Refresh(refreshTokenRequestDTO RefreshTokenRequestDTO) (*AuthR
 	return s.generateAuthResponse(storedToken.UserID)
 }
 
-func (s *Service) Logout(refreshTokenRequestDTO RefreshTokenRequestDTO) *apiError.ErrorDTO {
-	err := s.tokenRepo.DeleteByToken(refreshTokenRequestDTO.RefreshToken)
+func (s *Service) Logout(userID string) *apiError.ErrorDTO {
+	err := s.tokenRepo.DeleteAllTokensByUserID(userID)
 	if err != nil {
 		return apiError.NewInternalServerError("Failed to logout.")
 	}

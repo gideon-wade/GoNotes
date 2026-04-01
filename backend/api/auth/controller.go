@@ -16,69 +16,68 @@ func NewController(service *Service) *Controller {
 }
 
 func (ctrl *Controller) Register(ctx *gin.Context) {
-	var request RegisterRequestDTO
-	if err := ctx.BindJSON(&request); err != nil {
+	var registerRequest RegisterRequestDTO
+	err := ctx.BindJSON(&registerRequest)
+	if err != nil {
 		errResp := apiError.NewBadRequestError("Invalid request body.")
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
 
-	user, errResp := ctrl.service.Register(request)
+	user, errResp := ctrl.service.Register(registerRequest)
 	if errResp != nil {
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
-
 	ctx.IndentedJSON(http.StatusCreated, user)
 }
 
 func (ctrl *Controller) Login(ctx *gin.Context) {
-	var request LoginRequestDTO
-	if err := ctx.BindJSON(&request); err != nil {
+	var loginRequest LoginRequestDTO
+	err := ctx.BindJSON(&loginRequest)
+	if err != nil {
 		errResp := apiError.NewBadRequestError("Invalid request body.")
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
 
-	authResponse, errResp := ctrl.service.Login(request)
+	authResponse, errResp := ctrl.service.Login(loginRequest)
 	if errResp != nil {
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
-
 	ctx.IndentedJSON(http.StatusOK, authResponse)
 }
 
 func (ctrl *Controller) Refresh(ctx *gin.Context) {
-	var request RefreshTokenRequestDTO
-	if err := ctx.BindJSON(&request); err != nil {
+	var refreshRequest RefreshTokenRequestDTO
+	err := ctx.BindJSON(&refreshRequest)
+	if err != nil {
 		errResp := apiError.NewBadRequestError("Invalid request body.")
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
 
-	authResponse, errResp := ctrl.service.Refresh(request)
+	authResponse, errResp := ctrl.service.Refresh(refreshRequest)
 	if errResp != nil {
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
-
 	ctx.IndentedJSON(http.StatusOK, authResponse)
 }
 
 func (ctrl *Controller) Logout(ctx *gin.Context) {
-	var request RefreshTokenRequestDTO
-	if err := ctx.BindJSON(&request); err != nil {
-		errResp := apiError.NewBadRequestError("Invalid request body.")
+	userID := ctx.GetString("userID")
+	if userID == "" {
+		errResp := apiError.NewUnauthorizedError("Unauthorized.")
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
 
-	errResp := ctrl.service.Logout(request)
+	errResp := ctrl.service.Logout(userID)
 	if errResp != nil {
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
-
 	ctx.Status(http.StatusNoContent)
 }

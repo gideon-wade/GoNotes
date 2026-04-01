@@ -10,5 +10,5 @@ type RefreshTokenRepository interface {
 	Save(token RefreshToken) error
 	GetByToken(token string) (*RefreshToken, error)
 	DeleteByToken(token string) error
-	DeleteAllByUserID(userID string) error
+	DeleteAllTokensByUserID(userID string) error
 }

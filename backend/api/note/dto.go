@@ -13,7 +13,6 @@ type NoteResponseDTO struct {
 }
 
 type NewNoteRequestDTO struct {
-	UserID    string  `json:"userID" binding:"required"`
 	Title     string  `json:"title" binding:"required"`
 	Content   string  `json:"content" binding:"required"`
 	Latitude  float32 `json:"latitude" binding:"required"`

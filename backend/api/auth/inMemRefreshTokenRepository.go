@@ -34,7 +34,7 @@ func (r *InMemRefreshTokenRepository) DeleteByToken(token string) error {
 	return nil
 }
 
-func (r *InMemRefreshTokenRepository) DeleteAllByUserID(userID string) error {
+func (r *InMemRefreshTokenRepository) DeleteAllTokensByUserID(userID string) error {
 	for id, t := range r.tokens {
 		if t.UserID == userID {
 			delete(r.tokens, id)
