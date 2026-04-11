@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	apiError "github.com/gonotes/api/error"
+	apiError "github.com/gonotes/api/errors"
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )

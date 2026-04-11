@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
-	apiError "github.com/gonotes/api/error"
+	apiError "github.com/gonotes/api/errors"
 )
 
 func AuthMiddleware(jwtSecret []byte) gin.HandlerFunc {
