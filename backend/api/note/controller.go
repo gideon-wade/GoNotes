@@ -31,17 +31,24 @@ func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 			http.StatusBadRequest,
 			errors.NewBadRequestError("Invalid request body.", "The json body could not be serialized to the expected format.", "400-invalid-body"),
 		)
-	} else {
-		newNote, err := ctrl.service.CreateNewNote(newNoteRequest)
-		if err != nil {
-			ctx.IndentedJSON(
-				http.StatusInternalServerError,
-				error.NewInternalServerError("Failed to create note."),
-			)
-		} else {
-			ctx.IndentedJSON(http.StatusCreated, newNote)
-		}
-	}
+		return
+	} 
+	
+	newNote, err := ctrl.service.CreateNewNote(newNoteRequest)
+	if err != nil {
+			ctrl.logger.Log(logging.NewLogEventError(
+				"Failed to create note.",
+				err,
+			))
+		ctx.IndentedJSON(
+			http.StatusInternalServerError,
+			errors.NewStandardInternalServerError("Failed to create note."),
+		)
+		return
+	} 
+
+	ctrl.logger.Log(logging.RequestCompleted(ctx))
+	ctx.IndentedJSON(http.StatusCreated, newNote)
 }
 
 func (ctrl *Controller) GetAllNotes(ctx *gin.Context) {
