@@ -69,12 +69,12 @@ func (s *Service) generateRefreshToken(userID string) (*RefreshToken, error) {
 func (s *Service) generateAuthResponse(userID string) (*AuthResponseDTO, *apiError.ErrorDTO) {
 	accessToken, expiresAt, err := s.generateAccessToken(userID)
 	if err != nil {
-		return nil, apiError.NewInternalServerError("Failed to generate access token.")
+		return nil, apiError.NewStandardInternalServerError("Failed to generate access token.")
 	}
 
 	refreshToken, err := s.generateRefreshToken(userID)
 	if err != nil {
-		return nil, apiError.NewInternalServerError("Failed to generate refresh token.")
+		return nil, apiError.NewStandardInternalServerError("Failed to generate refresh token.")
 	}
 
 	return &AuthResponseDTO{
@@ -87,23 +87,26 @@ func (s *Service) generateAuthResponse(userID string) (*AuthResponseDTO, *apiErr
 func (s *Service) Register(registerRequestDTO RegisterRequestDTO) (*UserResponseDTO, *apiError.ErrorDTO) {
 	existingUser, err := s.userRepo.GetByEmail(registerRequestDTO.Email)
 	if err != nil {
-		return nil, apiError.NewInternalServerError("Failed to register user.")
+		return nil, apiError.NewStandardInternalServerError("Failed to register user.")
 	}
 
 	if existingUser != nil {
-		return nil, apiError.NewBadRequestError("Email already exists.")
+		return nil, apiError.NewBadRequestError(
+			"Email already exists.",
+			"The email '"+registerRequestDTO.Email+"' is already registered. Please use another email or login",
+			"400-invalid-body")
 	}
 
 	passwordHash, err := bcrypt.GenerateFromPassword([]byte(registerRequestDTO.Password), bcrypt.DefaultCost)
 	if err != nil {
-		return nil, apiError.NewInternalServerError("Failed to register user.")
+		return nil, apiError.NewStandardInternalServerError("Failed to register user.")
 	}
 
 	newUser := NewUser(registerRequestDTO.Email, string(passwordHash))
 
 	err = s.userRepo.Save(*newUser)
 	if err != nil {
-		return nil, apiError.NewInternalServerError("Failed to register user.")
+		return nil, apiError.NewStandardInternalServerError("Failed to register user.")
 	}
 
 	return &UserResponseDTO{
@@ -116,16 +119,22 @@ func (s *Service) Register(registerRequestDTO RegisterRequestDTO) (*UserResponse
 func (s *Service) Login(loginRequestDTO LoginRequestDTO) (*AuthResponseDTO, *apiError.ErrorDTO) {
 	user, err := s.userRepo.GetByEmail(loginRequestDTO.Email)
 	if err != nil {
-		return nil, apiError.NewInternalServerError("Failed to login.")
+		return nil, apiError.NewStandardInternalServerError("Failed to login.")
 	}
 
 	if user == nil {
-		return nil, apiError.NewUnauthorizedError("Invalid email or password.")
+		return nil, apiError.NewUnauthorizedError(
+			"Invalid email or password.",
+			"The given email and password do not match any user.",
+			"401-unauthorized")
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(loginRequestDTO.Password))
 	if err != nil {
-		return nil, apiError.NewUnauthorizedError("Invalid email or password.")
+		return nil, apiError.NewUnauthorizedError(
+			"Invalid email or password.",
+			"The given email and password do not match any user.",
+			"401-unauthorized")
 	}
 
 	return s.generateAuthResponse(user.ID)
@@ -134,20 +143,26 @@ func (s *Service) Login(loginRequestDTO LoginRequestDTO) (*AuthResponseDTO, *api
 func (s *Service) Refresh(refreshTokenRequestDTO RefreshTokenRequestDTO) (*AuthResponseDTO, *apiError.ErrorDTO) {
 	storedToken, err := s.tokenRepo.GetByToken(refreshTokenRequestDTO.RefreshToken)
 	if err != nil {
-		return nil, apiError.NewInternalServerError("Failed to refresh token.")
+		return nil, apiError.NewStandardInternalServerError("Failed to refresh token.")
 	}
 
 	if storedToken == nil {
-		return nil, apiError.NewUnauthorizedError("Invalid or expired refresh token.")
+		return nil, apiError.NewUnauthorizedError(
+			"Invalid or expired refresh token.",
+			"The given refresh token is invalid.",
+			"401-unauthorized")
 	}
 
 	err = s.tokenRepo.DeleteByToken(refreshTokenRequestDTO.RefreshToken)
 	if err != nil {
-		return nil, apiError.NewInternalServerError("Failed to refresh token.")
+		return nil, apiError.NewStandardInternalServerError("Failed to refresh token.")
 	}
 
 	if storedToken.ExpiresAt.Before(time.Now()) {
-		return nil, apiError.NewUnauthorizedError("Invalid or expired refresh token.")
+		return nil, apiError.NewUnauthorizedError(
+			"Invalid or expired refresh token.",
+			"The given refresh token has expired.",
+			"401-unauthorized")
 	}
 
 	return s.generateAuthResponse(storedToken.UserID)
@@ -156,7 +171,7 @@ func (s *Service) Refresh(refreshTokenRequestDTO RefreshTokenRequestDTO) (*AuthR
 func (s *Service) Logout(userID string) *apiError.ErrorDTO {
 	err := s.tokenRepo.DeleteAllTokensByUserID(userID)
 	if err != nil {
-		return apiError.NewInternalServerError("Failed to logout.")
+		return apiError.NewStandardInternalServerError("Failed to logout.")
 	}
 	return nil
 }

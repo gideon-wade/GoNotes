@@ -19,7 +19,10 @@ func (ctrl *Controller) Register(ctx *gin.Context) {
 	var registerRequest RegisterRequestDTO
 	err := ctx.BindJSON(&registerRequest)
 	if err != nil {
-		errResp := apiError.NewBadRequestError("Invalid request body.")
+		errResp := apiError.NewBadRequestError(
+			"Invalid request body.",
+			"The request body is not valid JSON or is missing required fields.",
+			"400-invalid-body")
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
@@ -36,7 +39,10 @@ func (ctrl *Controller) Login(ctx *gin.Context) {
 	var loginRequest LoginRequestDTO
 	err := ctx.BindJSON(&loginRequest)
 	if err != nil {
-		errResp := apiError.NewBadRequestError("Invalid request body.")
+		errResp := apiError.NewBadRequestError(
+			"Invalid request body.",
+			"The request body is not valid JSON or is missing required fields.",
+			"400-invalid-body")
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
@@ -53,7 +59,10 @@ func (ctrl *Controller) Refresh(ctx *gin.Context) {
 	var refreshRequest RefreshTokenRequestDTO
 	err := ctx.BindJSON(&refreshRequest)
 	if err != nil {
-		errResp := apiError.NewBadRequestError("Invalid request body.")
+		errResp := apiError.NewBadRequestError(
+			"Invalid request body.",
+			"The request body is not valid JSON or is missing required fields.",
+			"400-invalid-body")
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
@@ -69,7 +78,10 @@ func (ctrl *Controller) Refresh(ctx *gin.Context) {
 func (ctrl *Controller) Logout(ctx *gin.Context) {
 	userID := ctx.GetString("userID")
 	if userID == "" {
-		errResp := apiError.NewUnauthorizedError("Unauthorized.")
+		errResp := apiError.NewUnauthorizedError(
+			"Unauthorized.",
+			"The user is not authorized to perform this action.",
+			"401-unauthorized")
 		ctx.IndentedJSON(errResp.Status, errResp)
 		return
 	}
