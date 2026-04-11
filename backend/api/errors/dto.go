@@ -32,7 +32,7 @@ func NewError(errType string, title string, status int, detail, instance string,
 		Status:   status,
 		Detail:   detail,
 		Instance: instance,
-		Code: 	  code,
+		Code:     code,
 	}
 }
 
@@ -43,7 +43,7 @@ func NewErrorWithoutType(title string, status int, detail, instance string, code
 		Status:   status,
 		Detail:   detail,
 		Instance: instance,
-		Code: 	  code,
+		Code:     code,
 	}
 }
 
@@ -98,7 +98,7 @@ func NewStandardInternalServerError(detail string) *ErrorDTO {
 		Title:  TitleInternalServerError,
 		Status: http.StatusInternalServerError,
 		Detail: detail,
-		Code:  "500",
+		Code:   "500",
 	}
 }
 func NewInternalServerError(title string, detail string) *ErrorDTO {

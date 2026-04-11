@@ -2,11 +2,12 @@ package note
 
 import (
 	"time"
+	"github.com/google/uuid"
 )
 
-func  NewNote(title string, content string, userID string, latitude float32, longitude float32) *Note {
+func NewNote(title string, content string, userID string, latitude float32, longitude float32) *Note {
 	return &Note{
-		ID:      "d14a0232-8f22-44ce-b8c5-1d51053a361d",
+		ID:      uuid.New().String(),
 		UserID:  userID,
 		Title:   title,
 		Content: content,

@@ -8,11 +8,11 @@ func NewService(repo Repository) *Service {
 	return &Service{repo: repo}
 }
 
-func (s *Service) CreateNewNote(newNoteRequest NewNoteRequestDTO) (NoteResponseDTO, error) {
+func (s *Service) CreateNewNote(newNoteRequest NewNoteRequestDTO, userID string) (NoteResponseDTO, error) {
 	newNote := NewNote(
 		newNoteRequest.Title,
 		newNoteRequest.Content,
-		newNoteRequest.UserID,
+		userID,
 		newNoteRequest.Latitude,
 		newNoteRequest.Longitude,
 	)
