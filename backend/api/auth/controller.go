@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	apiError "github.com/gonotes/api/error"
+	apiError "github.com/gonotes/api/errors"
 )
 
 type Controller struct {

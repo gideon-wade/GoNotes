@@ -11,7 +11,7 @@ import (
 
 type Controller struct {
 	service *Service
-	logger logging.Logger
+	logger  logging.Logger
 }
 
 func NewController(service *Service, logger logging.Logger) *Controller {
@@ -25,29 +25,29 @@ func (ctrl *Controller) PostNewNote(ctx *gin.Context) {
 	if err != nil {
 		ctrl.logger.Log(logging.NewLogEventError(
 			"Invalid request body.",
-			err,	
+			err,
 		))
 		ctx.IndentedJSON(
 			http.StatusBadRequest,
 			errors.NewBadRequestError("Invalid request body.", "The json body could not be serialized to the expected format.", "400-invalid-body"),
 		)
 		return
-	} 
-	
+	}
+
 	userID := ctx.GetString("userID")
-  newNote, err := ctrl.service.CreateNewNote(newNoteRequest, userID)
+	newNote, err := ctrl.service.CreateNewNote(newNoteRequest, userID)
 
 	if err != nil {
-			ctrl.logger.Log(logging.NewLogEventError(
-				"Failed to create note.",
-				err,
-			))
+		ctrl.logger.Log(logging.NewLogEventError(
+			"Failed to create note.",
+			err,
+		))
 		ctx.IndentedJSON(
 			http.StatusInternalServerError,
 			errors.NewStandardInternalServerError("Failed to create note."),
 		)
 		return
-	} 
+	}
 
 	ctrl.logger.Log(logging.RequestCompleted(ctx))
 	ctx.IndentedJSON(http.StatusCreated, newNote)
@@ -62,7 +62,7 @@ func (ctrl *Controller) GetAllNotes(ctx *gin.Context) {
 			errors.NewStandardInternalServerError("Failed to get notes."),
 		)
 		return
-	} 
+	}
 	ctx.IndentedJSON(http.StatusOK, notes)
 }
 
@@ -77,7 +77,7 @@ func (ctrl *Controller) GetNoteByID(ctx *gin.Context) {
 			errors.NewStandardInternalServerError("Failed to get notes."),
 		)
 		return
-	} 
+	}
 	if note == nil {
 		ctx.IndentedJSON(
 			http.StatusNotFound,
@@ -88,7 +88,7 @@ func (ctrl *Controller) GetNoteByID(ctx *gin.Context) {
 			),
 		)
 		return
-	} 
+	}
 
 	ctx.IndentedJSON(http.StatusOK, note)
 }
